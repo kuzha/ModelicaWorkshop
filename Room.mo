@@ -1,22 +1,22 @@
 model Room "This is a model of a room, implemented using component-based modeling"
   extends Modelica.Icons.Example;
 
-  // Parameters (Paramètres)
+// Parameters (Paramètres)
   parameter Modelica.Units.SI.Area A_floor = 60 "Floor area of the room (Surface de plancher de la pièce)";
   parameter Modelica.Units.SI.Height h = 3 "Height of the room (Hauteur de la pièce)";
   parameter Modelica.Units.SI.ThermalConductance UA = 10000/30 "Overall heat loss coefficient (Coefficient de déperditions thermiques)";
   parameter Modelica.Units.SI.HeatFlowRate Q_ig = 1000 "Internal heat gains (Gains thermiques internes)";
   parameter Modelica.Units.SI.Temperature T_ia0(displayUnit = "degC") = 20 + 273.15 "Initial temperature (Température initiale)";
 
-  // Lumped parameters (Paramètres intermédiaires)
+// Lumped parameters (Paramètres intermédiaires)
   final parameter Modelica.Units.SI.Volume V = A_floor * h
     "Room volume (Volume de la pièce)";
 
-  // Components (Composantes)
+// Components (Composantes)
   Buildings.Fluid.MixingVolumes.MixingVolume zon(redeclare package Medium =
         Buildings.Media.Air "Moist air",
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=T_ia0,                       m_flow_nominal = 0.646, V = V, mSenFac = 1)  annotation (
+    T_start=T_ia0,                       m_flow_nominal = 0.646, V = V, mSenFac = 3)  annotation (
     Placement(transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon(G=UA)          annotation (
     Placement(transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}})));
@@ -26,7 +26,7 @@ model Room "This is a model of a room, implemented using component-based modelin
     Placement(transformation(origin = {-90, 70}, extent = {{-10, -10}, {10, 10}})));
   Buildings.BoundaryConditions.WeatherData.Bus weaBus annotation (
     Placement(transformation(origin = {-62, 70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-28, 36}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixHeaFlo(Q_flow=Q_ig)    annotation (
+  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow intGains(Q_flow=Q_ig)    annotation (
     Placement(transformation(origin = {10, 36}, extent = {{-10, -10}, {10, 10}})));
 
 equation
@@ -39,7 +39,7 @@ equation
     Line(points = {{-20, 70}, {0, 70}}, color = {191, 0, 0}));
   connect(theCon.port_b, zon.heatPort) annotation (
     Line(points = {{20, 70}, {40, 70}}, color = {191, 0, 0}));
-  connect(fixHeaFlo.port, zon.heatPort) annotation (
+  connect(intGains.port, zon.heatPort) annotation (
     Line(points = {{20, 36}, {28, 36}, {28, 70}, {40, 70}}, color = {191, 0, 0}));
 
 annotation (
