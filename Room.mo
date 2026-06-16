@@ -22,7 +22,7 @@ model Room "This is a model of a room, implemented using component-based modelin
     Placement(transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem annotation (
     Placement(transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}})));
-  Buildings.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=".\\Resources\\weatherdata\\USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")                                                                           annotation (
+  Buildings.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=Modelica.Utilities.Files.loadResource("modelica://Buildings/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))                                                                           annotation (
     Placement(transformation(origin = {-90, 70}, extent = {{-10, -10}, {10, 10}})));
   Buildings.BoundaryConditions.WeatherData.Bus weaBus annotation (
     Placement(transformation(origin = {-62, 70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-28, 36}, extent = {{-10, -10}, {10, 10}})));
