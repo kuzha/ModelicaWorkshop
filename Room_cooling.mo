@@ -6,7 +6,7 @@ model Room_cooling
     Placement(transformation(origin = {50, 48}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TOut annotation(
     Placement(transformation(origin = {10, 70}, extent = {{-10, -10}, {10, 10}})));
-  Buildings.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam = "C:/Users/kuzhang/Documents/Buildings 13.0.0/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos", TDryBul(displayUnit = "K"), TDryBulSou = Buildings.BoundaryConditions.Types.DataSource.File) annotation(
+  Buildings.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam = Modelica.Utilities.Files.loadResource("modelica://Buildings/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"), TDryBul(displayUnit = "K"), TDryBulSou = Buildings.BoundaryConditions.Types.DataSource.File) annotation(
     Placement(transformation(origin = {-50, 70}, extent = {{-10, -10}, {10, 10}})));
   Buildings.BoundaryConditions.WeatherData.Bus weaBus annotation(
     Placement(transformation(origin = {-20, 70}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-48, -40}, extent = {{-10, -10}, {10, 10}})));
